@@ -6,7 +6,6 @@ import net.minecraft.client.util.math.MatrixStack
 @Suppress("UNUSED")
 class Archaios: ModInitializer {
     override fun onInitialize() {
-
         // Mod starts
         println("Eternal mystery, eternal adventure. Thats the nature of this world")
 
