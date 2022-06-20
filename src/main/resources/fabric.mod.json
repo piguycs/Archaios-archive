@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "archaios",
+  "version": "${version}",
+  "name": "Archaíos",
+  "description": "Lost texts left by the ancient civilisations",
+  "authors": [
+    "thepiguy"
+  ],
+  "contact": {
+    "homepage": "https://example.com/",
+    "issues": "https://example.com/",
+    "sources": "https://example.com/"
+  },
+  "license": "MIT",
+  "icon": "assets/archaios/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "me.piguy.archaios.Archaios"
+      }
+    ]
+  },
+  "mixins": [
+    "archaios.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "fabric-language-kotlin": ">=1.7.4+kotlin.1.6.21",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  }
+}
