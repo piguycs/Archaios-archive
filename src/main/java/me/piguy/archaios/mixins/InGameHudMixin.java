@@ -10,8 +10,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-    @Inject(method="render", at=@At("HEAD"))
-    public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        Archaios.Companion.onRender(matrices);
-    }
+  @Inject(method="render", at=@At("HEAD"))
+  public void render(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+    Archaios.Companion.onRender(matrices);
+  }
 }
