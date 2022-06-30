@@ -20,6 +20,8 @@ public abstract class PlayerEntityMixin extends Entity implements PlayerEntityIn
   int bonusMana = 50;
   int manaMultiplier = 2;
 
+  int manaRegen = 5;
+
   int MAX_MANA = calculateMana();
 
   public PlayerEntityMixin(EntityType<?> type, World world) {
@@ -36,7 +38,9 @@ public abstract class PlayerEntityMixin extends Entity implements PlayerEntityIn
   }
 
   public void setMana(int mana) {
-    this.dataTracker.set(MANA, mana);
+    if (!(mana <=0)) {
+      this.dataTracker.set(MANA, mana);
+    }
   }
 
   public void addMana(int amt) {
@@ -45,6 +49,13 @@ public abstract class PlayerEntityMixin extends Entity implements PlayerEntityIn
 
   public int calculateMana() {
     return (baseMana * manaMultiplier) + bonusMana;
+  }
+
+  public void regenMana() {
+    int mana = getMana();
+    if (mana < MAX_MANA) {
+      addMana(manaRegen);
+    }
   }
 
 }

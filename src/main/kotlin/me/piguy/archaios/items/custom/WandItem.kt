@@ -16,21 +16,8 @@ class WandItem(settings: Settings?) : Item(settings) {
         // execute on the server
         if (user is PlayerEntityInterface) {
           val mana = (user as PlayerEntityInterface).getMana()
-          println(user.calculateMana())
-          outputUsage(user, mana)
-
-        } else {
-          outputUsage(user, -1)
-
+          user.setMana(mana - 10)
         }
-
-        // PlayerEntityMixin has mana
-
-
-
-
-
-
       }
     }
 

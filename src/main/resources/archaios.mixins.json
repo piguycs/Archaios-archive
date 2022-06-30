@@ -10,6 +10,7 @@
     "ServerWorldMixin"
   ],
   "client": [
+    "InGameHudMixin",
     "MinecraftClientMixin"
   ]
 }

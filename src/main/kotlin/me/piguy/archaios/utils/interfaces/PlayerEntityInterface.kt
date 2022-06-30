@@ -5,5 +5,6 @@ interface PlayerEntityInterface {
   fun setMana(mana:Int)
   fun addMana(amt:Int)
   fun calculateMana() : Int
+  fun regenMana()
 }
 
