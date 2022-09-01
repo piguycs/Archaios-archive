@@ -21,6 +21,12 @@
         "adapter": "kotlin",
         "value": "me.piguy.archaios.Archaios"
       }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "me.piguy.archaios.ArchaiosClient"
+      }
     ]
   },
   "mixins": [

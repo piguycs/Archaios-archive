@@ -1,4 +1,6 @@
 {
   "item.archaios.wand": "Wand",
-  "itemGroup.archaios.archaios": "Archaios"
+  "itemGroup.archaios.archaios": "Archaios",
+  "key.archaios.category.archaios": "Archaios",
+  "key.archaios.ability": "Ability"
 }
