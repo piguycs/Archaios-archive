@@ -12,8 +12,8 @@ import org.lwjgl.glfw.GLFW
 class InputHandler {
 
   companion object {
-    var KEY_CATEGORY = "key.archaios.category.archaios"
-    var KEY_ABILITY = "key.archaios.ability"
+    private var KEY_CATEGORY = "key.archaios.category.archaios"
+    private var KEY_ABILITY = "key.archaios.ability"
 
     private var drinkingKey: KeyBinding? = null
 
@@ -22,7 +22,7 @@ class InputHandler {
       ClientTickEvents.END_CLIENT_TICK.register {
         if (drinkingKey?.wasPressed() == true) {
 //          ClientPlayNetworking.send(ArchaiosMessages.EXAMPLE_ID, PacketByteBufs.create())
-          ClientPlayNetworking.send(ArchaiosMessages.ABILITY_ID, PacketByteBufs.create())
+          ClientPlayNetworking.send(ArchaiosMessages.CASTING_ID, PacketByteBufs.create())
         }
       }
     }

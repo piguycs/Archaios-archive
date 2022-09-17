@@ -1,11 +1,14 @@
 package me.piguy.archaios
 
+import me.piguy.archaios.events.PlayerTickHandler
 import me.piguy.archaios.items.ModItems
 import me.piguy.archaios.networking.ArchaiosMessages
 import net.fabricmc.api.ModInitializer
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
 import net.minecraft.world.GameRules
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 
@@ -18,12 +21,14 @@ class Archaios : ModInitializer {
     ModItems.registerModItems()
 
     ArchaiosMessages.registerC2SPackets()
+
+    ServerTickEvents.START_SERVER_TICK.register(PlayerTickHandler())
   }
 
 
   companion object {
-    val MOD_ID = "archaios"
-    val LOGGER = LoggerFactory.getLogger(MOD_ID)
+    const val MOD_ID = "archaios"
+    val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
     private val mc = MinecraftClient.getInstance()
     private var counter = 1
 

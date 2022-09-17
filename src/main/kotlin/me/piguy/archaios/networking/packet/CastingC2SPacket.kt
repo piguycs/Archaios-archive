@@ -1,5 +1,7 @@
 package me.piguy.archaios.networking.packet
 
+import me.piguy.archaios.utils.IEntityDataSaver
+import me.piguy.archaios.utils.ManaData
 import net.fabricmc.fabric.api.networking.v1.PacketSender
 import net.minecraft.block.Blocks
 import net.minecraft.network.PacketByteBuf
@@ -20,33 +22,53 @@ class CastingC2SPacket {
       server: MinecraftServer, player: ServerPlayerEntity, handler: ServerPlayNetworkHandler,
       buf: PacketByteBuf, responseSender: PacketSender
     ) {
+      if (player !is IEntityDataSaver) return
+
       val world = player.world as ServerWorld
-      var isAroundQuartz = BlockPos.stream(player.boundingBox.expand(2.0))
-        .map(world::getBlockState)
-        .filter { it.isOf(Blocks.QUARTZ_BLOCK) }.toArray().isNotEmpty()
 
+      val canCast = checkCanCast(player)
 
-      if (isAroundQuartz) {
-        player.sendMessage(
-          Text.literal("Casted arcane")
-            .fillStyle(Style.EMPTY.withColor(Formatting.AQUA)),
-          true
-        )
+      if (canCast) {
+
+        ManaData.addMana(player, -5)
+
+//        player.sendMessage(
+//          Text.literal("Casted arcane ${ManaData.getMana(player)}")
+//            .fillStyle(Style.EMPTY.withColor(Formatting.AQUA)),
+//          true
+//        )
         world.playSound(
           null, player.blockPos, SoundEvents.ENTITY_ENDERMAN_TELEPORT,
           SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1f + 0.9f
         )
 
       } else {
-        player.sendMessage(
-          Text.literal("No Arcane nearby")
-            .fillStyle(Style.EMPTY.withColor(Formatting.RED)),
-          true
+//        player.sendMessage(
+//          Text.literal("Out of mana ${ManaData.getMana(player)}")
+//            .fillStyle(Style.EMPTY.withColor(Formatting.RED)),
+//          true
+//        )
+
+
+        world.playSound(
+          null, player.blockPos, SoundEvents.ITEM_BOTTLE_EMPTY,
+          SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1f + 0.9f
         )
 
+
+//        ManaData.syncMana(player, player.getPersistentData().getInt("mana"))
       }
-
-
     }
+
+    private fun checkCanCast(player: ServerPlayerEntity, amount: Int = -5): Boolean {
+      return if (player is IEntityDataSaver) {
+        val mana = ManaData.getMana(player)
+        (mana + amount) in 0..10
+      } else {
+        false
+      }
+    }
+
+
   }
 }
