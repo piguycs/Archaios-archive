@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "archaios",
+  "version": "${version}",
+  "name": "Archaios",
+  "description": "Lost texts left by the ancient civilisations",
+  "authors": [
+    "thepiguy_"
+  ],
+  "contact": {
+    "homepage": "https://github.com/RocKing1001/Archaios",
+    "sources": "https://github.com/RocKing1001/Archaios",
+    "issues": "https://github.com/RocKing1001/Archaios/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/archaios/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "me.piguy.archaios.Archaios",
+        "adapter": "kotlin"
+      }
+    ],
+    "client": [
+      {
+        "value": "me.piguy.archaios.ArchaiosClient",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "mixins": [
+    "archaios.mixins.json",
+    {
+      "config": "archaios.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.13",
+    "minecraft": "~1.19.3",
+    "java": ">=17",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=1.8.0"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
