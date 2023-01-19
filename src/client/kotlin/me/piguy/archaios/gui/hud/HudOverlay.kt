@@ -1,9 +1,12 @@
 package me.piguy.archaios.gui.hud
 
-import me.piguy.archaios.gui.MyFirstScreen
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.util.math.MatrixStack
+import net.minecraft.text.OrderedText
+import net.minecraft.text.Text
+import net.minecraft.util.Formatting
+import java.awt.Color
 
 class HudOverlay : HudRenderCallback {
   override fun onHudRender(matrixStack: MatrixStack?, tickDelta: Float) {
@@ -12,8 +15,8 @@ class HudOverlay : HudRenderCallback {
     val width = mc.window.scaledWidth
     val height = mc.window.scaledHeight
 
-    val sc = MyFirstScreen()
 
-    sc.render(matrixStack, 0, 0, 0f)
+    mc.textRenderer.drawWithShadow(matrixStack, "MANA", width / 2f, height - 54f, Formatting.BLUE.colorValue!!)
+
   }
 }

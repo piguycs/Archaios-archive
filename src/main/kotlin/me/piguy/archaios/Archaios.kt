@@ -1,5 +1,6 @@
 package me.piguy.archaios
 
+import me.piguy.archaios.networking.ArchaiosServerNetworking
 import net.fabricmc.api.ModInitializer
 import org.slf4j.LoggerFactory
 
@@ -10,5 +11,6 @@ object Archaios : ModInitializer {
 
 
   override fun onInitialize() {
+    ArchaiosServerNetworking.registerC2SPackets()
   }
 }
