@@ -1,5 +1,6 @@
 package me.piguy.archaios.gui
 
+import com.mojang.authlib.GameProfile
 import io.wispforest.owo.ui.base.BaseOwoScreen
 import io.wispforest.owo.ui.component.ButtonComponent
 import io.wispforest.owo.ui.component.Components
@@ -8,6 +9,10 @@ import io.wispforest.owo.ui.container.FlowLayout
 import io.wispforest.owo.ui.core.*
 import me.piguy.archaios.Archaios.logger
 import net.minecraft.client.MinecraftClient
+import net.minecraft.client.render.entity.model.PlayerEntityModel
+import net.minecraft.entity.Entity
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.player.PlayerEntity
 import org.jetbrains.annotations.NotNull
 import java.util.function.Consumer
 
@@ -33,13 +38,22 @@ class CharacterScreen : BaseOwoScreen<FlowLayout>() {
       .horizontalAlignment(HorizontalAlignment.CENTER)
       .verticalAlignment(VerticalAlignment.CENTER);
 
+
+
+
+    val pl = mc.player as LivingEntity
+
+//    pl.bodyYaw = (180 + mc.mouse.x * 20).toFloat()
+//    pl.setYaw((180.0f + mc.mouse.x * 40.0f).toFloat())
+//    pl.setPitch((-mc.mouse.y * 20.0f).toFloat())
+
     rootComponent
       .child(
         Containers.verticalFlow(Sizing.content(), Sizing.content())
           .child(
             Components.entity(
               Sizing.fixed(64),
-              mc.player
+              pl
             )
               .lookAtCursor(true)
               .allowMouseRotation(true)
