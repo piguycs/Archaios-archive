@@ -1,4 +1,5 @@
 {
   "itemGroup.archaios.archaios_group": "Archaios",
-  "block.archaios.alchemy_table": "Alchemy Table"
+  "block.archaios.alchemy_table": "Alchemy Table",
+  "archaios.alchemy_table_screen": "Alchemy"
 }
