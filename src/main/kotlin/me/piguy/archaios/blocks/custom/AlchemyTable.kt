@@ -5,7 +5,6 @@ import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
-import net.minecraft.screen.NamedScreenHandlerFactory
 import net.minecraft.state.StateManager
 import net.minecraft.util.ActionResult
 import net.minecraft.util.BlockMirror
@@ -46,6 +45,7 @@ class AlchemyTable :
     createCuboidShape(13.0, 0.0, 22.0, 15.0, 11.0, 24.0),
     createCuboidShape(13.0, 0.0, -8.0, 15.0, 11.0, -6.0)
   ).reduce { v1, v2 -> VoxelShapes.combineAndSimplify(v1, v2, BooleanBiFunction.OR) }.get();
+
 
   //</editor-fold>
 

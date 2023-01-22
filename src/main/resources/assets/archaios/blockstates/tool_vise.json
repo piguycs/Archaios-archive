@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "archaios:block/tool_vise" },
+    "facing=east": { "model": "archaios:block/tool_vise", "y": 90 },
+    "facing=south": { "model": "archaios:block/tool_vise", "y": 180 },
+    "facing=west": { "model": "archaios:block/tool_vise", "y": 270 }
+  }
+}
