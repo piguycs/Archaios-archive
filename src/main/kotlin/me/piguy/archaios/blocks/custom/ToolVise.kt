@@ -1,23 +1,26 @@
 package me.piguy.archaios.blocks.custom
 
+import me.piguy.archaios.blocks.entity.entities.AlchemyTableBlockEntity
+import me.piguy.archaios.blocks.entity.entities.ToolViseBlockEntity
 import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
+import net.minecraft.block.entity.BlockEntity
+import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
-import net.minecraft.util.BlockMirror
-import net.minecraft.util.BlockRotation
-import net.minecraft.util.DyeColor
-import net.minecraft.util.Identifier
+import net.minecraft.util.*
 import net.minecraft.util.function.BooleanBiFunction
+import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.util.shape.VoxelShape
 import net.minecraft.util.shape.VoxelShapes
 import net.minecraft.world.BlockView
+import net.minecraft.world.World
 import org.jetbrains.annotations.Nullable
 import java.util.stream.Stream
 
-class ToolVise : Block(SETTINGS) {
+class ToolVise : BlockWithEntity(SETTINGS) {
 
   //<editor-fold desc="SHAPE_N_S">
 
@@ -275,6 +278,32 @@ class ToolVise : Block(SETTINGS) {
 
   override fun appendProperties(builder: StateManager.Builder<Block, BlockState?>) {
     builder.add(AlchemyTable.FACING)
+  }
+
+  // Block Entity
+
+  override fun onUse(
+    state: BlockState,
+    world: World,
+    pos: BlockPos,
+    player: PlayerEntity,
+    hand: Hand,
+    hit: BlockHitResult
+  ): ActionResult {
+    if (!world.isClient) {
+      val screenHandlerFactory = world.getBlockEntity(pos) as ToolViseBlockEntity
+      player.openHandledScreen(screenHandlerFactory)
+      return ActionResult.SUCCESS
+    }
+    return ActionResult.FAIL
+  }
+
+  override fun getRenderType(state: BlockState): BlockRenderType {
+    return BlockRenderType.MODEL
+  }
+
+  override fun createBlockEntity(pos: BlockPos, state: BlockState): BlockEntity {
+    return ToolViseBlockEntity(pos, state)
   }
 
 }

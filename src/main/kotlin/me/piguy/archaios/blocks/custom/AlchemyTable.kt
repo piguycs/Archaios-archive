@@ -1,6 +1,6 @@
 package me.piguy.archaios.blocks.custom
 
-import me.piguy.archaios.blocks.entity.AlchemyTableBlockEntity
+import me.piguy.archaios.blocks.entity.entities.AlchemyTableBlockEntity
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity

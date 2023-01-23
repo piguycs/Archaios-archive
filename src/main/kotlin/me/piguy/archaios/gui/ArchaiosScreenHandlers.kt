@@ -12,13 +12,26 @@ import net.minecraft.util.Identifier
 
 class ArchaiosScreenHandlers {
   companion object {
-    val ALCHEMY_TABLE_SCREEN_HANDLER: ScreenHandlerType<AlchemyTableScreenHandler> =
+    val ALCHEMY_TABLE_SCREEN_HANDLER =
       ExtendedScreenHandlerType { syncId: Int, inventory: PlayerInventory, buf: PacketByteBuf ->
         AlchemyTableScreenHandler.new(syncId, inventory, buf)
       }
+    val TOOL_VISE_SCREEN_HANDLER =
+      ExtendedScreenHandlerType { syncId: Int, inventory: PlayerInventory, _ ->
+        ToolViseScreenHandler.new(syncId, inventory)
+      }
 
     fun register() {
-      Registry.register(Registries.SCREEN_HANDLER, Identifier(MOD_ID, "alchemy_table_screen_handler"), ALCHEMY_TABLE_SCREEN_HANDLER)
+      Registry.register(
+        Registries.SCREEN_HANDLER,
+        Identifier(MOD_ID, "alchemy_table_screen_handler"),
+        ALCHEMY_TABLE_SCREEN_HANDLER
+      )
+      Registry.register(
+        Registries.SCREEN_HANDLER,
+        Identifier(MOD_ID, "tool_vise_screen_handler"),
+        TOOL_VISE_SCREEN_HANDLER
+      )
     }
 
   }

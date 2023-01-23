@@ -2,7 +2,7 @@ package me.piguy.archaios
 
 import io.wispforest.owo.registration.reflect.FieldRegistrationHandler
 import me.piguy.archaios.blocks.ArchaiosBlocks
-import me.piguy.archaios.blocks.entity.ArchaiosBlockEntities
+import me.piguy.archaios.blocks.ArchaiosBlockEntities
 import me.piguy.archaios.gui.ArchaiosScreenHandlers
 import me.piguy.archaios.networking.ArchaiosServerNetworking
 import net.fabricmc.api.ModInitializer
