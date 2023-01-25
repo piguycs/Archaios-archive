@@ -21,7 +21,7 @@ class AlchemyTableScreenHandler/*, entity: BlockEntity*/(
   syncId
 ) {
 
-  val inv: Inventory;
+  val inv: Inventory
 
   companion object {
     fun new(syncId: Int, inventory: PlayerInventory, buf: PacketByteBuf): AlchemyTableScreenHandler {

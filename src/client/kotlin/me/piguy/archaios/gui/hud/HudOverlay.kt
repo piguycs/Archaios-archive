@@ -2,6 +2,8 @@ package me.piguy.archaios.gui.hud
 
 import com.mojang.blaze3d.systems.RenderSystem
 import me.piguy.archaios.Archaios.MOD_ID
+import me.piguy.archaios.utils.ManaData.Companion.getMana
+import me.piguy.archaios.utils.interfaces.IEntityDataSaver
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.gui.DrawableHelper.drawTexture
@@ -23,9 +25,10 @@ class HudOverlay : HudRenderCallback {
     RenderSystem.setShaderTexture(0, MANA_TEXTURE)
 
     // drawing the empty texture
-    for (i in 1..10) {
+    val mana = getMana(mc.player as IEntityDataSaver)
+    for (i in 1..mana) {
       drawTexture(
-        matrixStack, (width/2) + (i * 8) + 2 , +height - 49, 0f, 0f,
+        matrixStack, (width / 2) + (i * 8) + 2, +height - 49, 0f, 0f,
         9, 9, 64, 64
       )
     }

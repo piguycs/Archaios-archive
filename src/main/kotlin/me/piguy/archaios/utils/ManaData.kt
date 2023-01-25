@@ -1,47 +1,81 @@
 package me.piguy.archaios.utils
 
-import me.piguy.archaios.networking.ArchaiosServerNetworking
-import me.piguy.archaios.networking.interfaces.IEntityDataSaver
-import net.fabricmc.fabric.api.networking.v1.PacketByteBufs
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import me.piguy.archaios.Archaios
+import me.piguy.archaios.networking.ManaSyncPacket
+import me.piguy.archaios.utils.interfaces.IEntityDataSaver
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.text.Text
 
-object ManaData {
-  fun addMana(player: IEntityDataSaver, amount: Int): Int {
 
-    val mana = getMana(player)
-    val newMana = mana + amount
+class ManaData {
 
-    if (newMana in 0..10) {
-      setMana(player, newMana)
+  companion object {
+    fun getMana(player: ServerPlayerEntity): Int {
+      if (player is IEntityDataSaver) {
+        val nbt = player.getPersistentData()
+        return nbt.getInt("archaios.mana")
+      }
+
+      player.sendMessage(Text.literal("Player is not of type IEntityDataSaver"))
+      Archaios.logger.info("Player is not of type IEntityDataSaver")
+      return -1
     }
 
-    return getMana(player);
-  }
+    fun getMana(player: IEntityDataSaver): Int {
+      val nbt = player.getPersistentData()
+      return nbt.getInt("archaios.mana")
+    }
 
-  fun getMana(player: IEntityDataSaver): Int {
-    val nbt = player.getPersistentData()
-    val mana = nbt.getInt("mana")
+    fun setMana(player: ServerPlayerEntity, amount: Int) {
+      if (player is IEntityDataSaver && amount >= 0 && amount <= 10) {
+        val nbt = player.getPersistentData()
+        nbt.putInt("archaios.mana", amount)
+      }
 
-    return mana
-  }
+      syncData(player, amount)
+    }
+
+    fun setMana(player: IEntityDataSaver, amount: Int) {
+      val nbt = player.getPersistentData()
+      nbt.putInt("archaios.mana", amount)
+
+      if (player is ServerPlayerEntity) {
+        syncData(player, amount)
+      } else {
+        Archaios.logger.warn("Player is not of type ServerPlayerEntity, cant call syncData")
+      }
+
+    }
+
+    fun syncData(player: ServerPlayerEntity, amount: Int) {
+      Archaios.ARCHAIOS_CHANNEL.serverHandle(player).send(
+        ManaSyncPacket(
+          amount
+        )
+      )
+    }
+
+    fun castMana(player: ServerPlayerEntity, cost: Int) {
+      if (player is IEntityDataSaver) {
+        val nbt = player.getPersistentData()
+
+        val currMana = getMana(player as IEntityDataSaver)
 
 
-  private fun setMana(player: IEntityDataSaver, amount: Int) {
-    val nbt = player.getPersistentData()
-    nbt.putInt("mana", amount)
+        if (cost <= currMana) {
+          val mana = currMana - cost
+          nbt.putInt("archaios.mana", mana)
+          syncData(player, mana)
+        } else {
+          player.sendMessage(Text.of("Not enough mana"), true)
+        }
 
-    syncMana(player as ServerPlayerEntity, amount)
-  }
 
-  fun getMaxMana(player: IEntityDataSaver): Int {
-    return 10;
-  }
+      } else {
+        Archaios.logger.warn("Player is not of type IEntityDataSaver, cant reduce mana")
+      }
+    }
 
-  fun syncMana(player: ServerPlayerEntity, mana: Int) {
-    val buffer = PacketByteBufs.create()
-    buffer.writeInt(mana)
-    ServerPlayNetworking.send(player, ArchaiosServerNetworking.MANA_SYNC, buffer)
   }
 
 }

@@ -36,9 +36,7 @@ class CharacterScreen : BaseOwoScreen<FlowLayout>() {
     rootComponent
       .surface(Surface.VANILLA_TRANSLUCENT)
       .horizontalAlignment(HorizontalAlignment.CENTER)
-      .verticalAlignment(VerticalAlignment.CENTER);
-
-
+      .verticalAlignment(VerticalAlignment.CENTER)
 
 
     val pl = mc.player as LivingEntity
