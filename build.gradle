@@ -55,7 +55,6 @@ dependencies {
   modImplementation "com.terraformersmc:modmenu:${project.mod_menu}"
   kapt modImplementation("io.wispforest:owo-lib:${project.owo_version}")
   include "io.wispforest:owo-sentinel:${project.owo_version}"
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 //    modImplementation "com.jozufozu.flywheel:flywheel-fabric-1.19.2:0.6.8-2"
 
 }

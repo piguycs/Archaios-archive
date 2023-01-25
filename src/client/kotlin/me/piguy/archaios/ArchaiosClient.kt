@@ -43,7 +43,7 @@ object ArchaiosClient : ClientModInitializer {
 
     ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient ->
       while (key.wasPressed()) {
-        client.setScreenAndRender(CharacterScreen())
+//        client.setScreenAndRender(CharacterScreen())
 //        client.setScreenAndRender(MyScreen.new())
       }
     })
