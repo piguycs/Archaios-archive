@@ -27,6 +27,12 @@
         "value": "me.piguy.archaios.ArchaiosClient",
         "adapter": "kotlin"
       }
+    ],
+    "fabric-datagen": [
+      {
+        "value": "me.piguy.archaios.data.DataGen",
+        "adapter": "kotlin"
+      }
     ]
   },
   "mixins": [

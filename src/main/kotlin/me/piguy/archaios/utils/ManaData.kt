@@ -47,6 +47,10 @@ class ManaData {
 
     }
 
+    fun addMana(player: ServerPlayerEntity, amount: Int) {
+      setMana(player, amount + getMana(player))
+    }
+
     fun syncData(player: ServerPlayerEntity, amount: Int) {
       Archaios.ARCHAIOS_CHANNEL.serverHandle(player).send(
         ManaSyncPacket(

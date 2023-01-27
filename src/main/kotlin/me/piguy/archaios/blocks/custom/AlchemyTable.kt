@@ -1,15 +1,14 @@
 package me.piguy.archaios.blocks.custom
 
+import me.piguy.archaios.Archaios
 import me.piguy.archaios.blocks.entity.entities.AlchemyTableBlockEntity
+import net.fabricmc.fabric.api.`object`.builder.v1.block.FabricBlockSettings
 import net.minecraft.block.*
 import net.minecraft.block.entity.BlockEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
 import net.minecraft.state.StateManager
-import net.minecraft.util.ActionResult
-import net.minecraft.util.BlockMirror
-import net.minecraft.util.BlockRotation
-import net.minecraft.util.Hand
+import net.minecraft.util.*
 import net.minecraft.util.function.BooleanBiFunction
 import net.minecraft.util.hit.BlockHitResult
 import net.minecraft.util.math.BlockPos
@@ -23,9 +22,11 @@ import java.util.stream.Stream
 
 
 class AlchemyTable :
-  BlockWithEntity(Settings.of(Material.WOOD)) {
+  BlockWithEntity(SETTINGS) {
   companion object {
     val FACING = HorizontalFacingBlock.FACING
+
+    val SETTINGS = FabricBlockSettings.of(Material.METAL).strength(4f).requiresTool()
   }
 
   //<editor-fold desc="voxel">

@@ -2,6 +2,7 @@ package me.piguy.archaios
 
 import me.piguy.archaios.config.ArchaiosConfig
 import me.piguy.archaios.gui.ArchaiosScreenHandlers
+import me.piguy.archaios.gui.CharacterScreen
 import me.piguy.archaios.gui.hud.HudOverlay
 import me.piguy.archaios.gui.screens.AlchemyTableScreen
 import me.piguy.archaios.gui.screens.ToolViseScreen
@@ -42,17 +43,9 @@ object ArchaiosClient : ClientModInitializer {
 
     ClientTickEvents.END_CLIENT_TICK.register(ClientTickEvents.EndTick { client: MinecraftClient ->
       while (key.wasPressed()) {
-//        client.setScreenAndRender(CharacterScreen())
-//        client.setScreenAndRender(MyScreen.new())
-        Archaios.ARCHAIOS_CHANNEL.clientHandle().send(
-          ManaCastPacket(
-            2
-          )
-        )
+        client.setScreenAndRender(CharacterScreen())
       }
     })
-
-//    BlockRenderLayerMap.INSTANCE.putBlock(ArchaiosBlocks.ALCHEMY_TABLE, RenderLayer.getCutout())
 
 
     // BLOCK ENTITIES
