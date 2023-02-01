@@ -15,14 +15,11 @@ class ArchaiosRecipeGenerator(output: FabricDataOutput) : FabricRecipeProvider(o
     ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ArchaiosBlocks.ALCHEMY_TABLE)
       .pattern("###")
       .pattern("IOI")
-      .pattern("I-I")
+      .pattern("I I")
       .input('#', Items.NETHERITE_INGOT)
       .input('O', Items.NETHER_STAR)
       .input('I', Items.IRON_INGOT)
-      .input('-', Items.AIR)
       .criterion(hasItem(Items.NETHER_STAR), conditionsFromItem(Items.NETHER_STAR))
-      .criterion(hasItem(Items.NETHERITE_INGOT), conditionsFromItem(Items.NETHERITE_INGOT))
-      .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
       .offerTo(exporter, Identifier(getRecipeName(ArchaiosBlocks.ALCHEMY_TABLE)))
   }
 }

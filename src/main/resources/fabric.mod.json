@@ -4,6 +4,7 @@
   "version": "${version}",
   "name": "Archaios",
   "description": "Lost texts left by the ancient civilisations",
+  "accessWidener": "archaios.accesswidener",
   "authors": [
     "thepiguy_"
   ],

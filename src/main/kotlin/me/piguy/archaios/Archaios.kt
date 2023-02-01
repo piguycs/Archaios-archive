@@ -32,7 +32,6 @@ object Archaios : ModInitializer {
     FieldRegistrationHandler.register(ArchaiosBlockEntities::class.java, MOD_ID, false)
     FieldRegistrationHandler.register(ArchaiosItems::class.java, MOD_ID, false)
 
-
     ArchaiosScreenHandlers.register()
 
     ArchaiosGroup.ARCHAIOS_GROUP.initialize()
